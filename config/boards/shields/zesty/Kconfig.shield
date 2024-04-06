@@ -1,0 +1,5 @@
+config SHIELD_ZESTY_LEFT
+    def_bool $(shields_list_contains,zesty_left)
+
+config SHIELD_ZESTY_RIGHT
+    def_bool $(shields_list_contains,zesty_right)
