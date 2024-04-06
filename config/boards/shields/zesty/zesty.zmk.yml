@@ -1,0 +1,12 @@
+file_format: '1'
+id: zesty
+name: Zesty
+type: shield
+url: https://github.com/DavidCassity/TheZestyKeeb
+requires:
+  - pro_micro
+features:
+  - keys
+siblings:
+  - zesty_left
+  - zesty_right
