@@ -2,8 +2,8 @@
 #include <dt-bindings/zmk/keys.h>
 
 #include "helper.h"
-#include "keypos_def\zesty32keys.h"
-#include "international_chars\german.dtsi"
+#include "zesty32keys.h"
+#include "german.dtsi"
 
 /* layer and key shortcuts */
 
