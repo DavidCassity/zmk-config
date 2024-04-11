@@ -11,7 +11,7 @@
 
 #define DEF 0  // layer shortcuts, must match order in which they are defined below
 #define NAV 1
-#define NUM 2
+#define SYM 2
 #define GER 3
 
 /* custom behaviors */
@@ -30,9 +30,9 @@ ZMK_BEHAVIOR(ss_cw, tap_dance,
     bindings = <&sk LSHFT>, <&caps_word>;
 )
 
-// tap: backspace | shift + tap: delete | hold: num layer
+// tap: backspace | shift + tap: delete | hold: sym layer
 ZMK_BEHAVIOR(bs_del_num, mod_morph,
-    bindings = <&lt NUM BSPC>, <&kp DEL>;
+    bindings = <&lt SYM BSPC>, <&kp DEL>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
@@ -46,8 +46,8 @@ ZMK_BEHAVIOR(win_sleep, macro,
 // euro sign
 ZMK_UNICODE_SINGLE(euro_sign, N2, N0, A, C)  // €
 
-// replace a/o/u/s with German umlauts when NAV and NUM are held jointly
-ZMK_CONDITIONAL_LAYER(NAV NUM, GER)
+// replace a/o/u/s with German umlauts when NAV and SYM are held jointly
+ZMK_CONDITIONAL_LAYER(NAV SYM, GER)
 
 // combos
 #undef COMBO_TERM
@@ -60,13 +60,13 @@ ZMK_COMBO(combo_paste,  &kp LC(V),  LB1 LB2, ALL)  // Ctrl + V, active on all la
 
 ZMK_LAYER(default_layer,
      //               ╭─────────────┬─────────────┬─────────────┬─────────────╮                             ╭─────────────┬─────────────┬─────────────┬─────────────╮
-                        &kp W         &kp F         &kp P         &kp B                                       &kp J         &kp L         &kp U         &kp Y        
+                        &kp W         &kp F         &kp P         &kp B                                       &kp K         &kp L         &kp U         &kp Y        
      // ╭─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╮ ╭─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮
-          &hrm LGUI A   &hrm LALT R   &hrm LCTRL S  &hrm LSHFT T  &kp G         &kp M           ___           &hrm RSHFT N  &hrm LCTRL E  &hrm LALT I   &hrm LGUI O   ___
+          &hrm LGUI Q   &hrm LALT A   &hrm LCTRL R  &kp S         &hrm LSHFT T  &kp G           &kp M         &hrm RSHFT N  &hrm LCTRL E  &hrm LALT I   &hrm LGUI O   &kp APOS
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯ ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────╯
-                        &kp X         &kp C         &kp D         &kp V                                       &kp K         &kp H         &kp COMMA     &kp DOT      
+                        &kp X         &kp C         &kp D         &kp V                                       &kp J         &kp H         &kp COMMA     &kp PERIOD      
      //               ╰─────────────┼─────────────┼─────────────┼─────────────┤─────────────╮ ╭─────────────├─────────────┼─────────────┼─────────────┼─────────────╯
-                                                                  &lt NAV SPACE &kp TAB         ___           ___                    
+                                                                  &lt NAV TAB   &kp SPACE       &kp BSPC      &kp ENTER                    
      //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
@@ -82,15 +82,15 @@ ZMK_LAYER(nav_layer,
      //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
-ZMK_LAYER(num_layer,
+ZMK_LAYER(sym_layer,
      //               ╭─────────────┬─────────────┬─────────────┬─────────────╮                             ╭─────────────┬─────────────┬─────────────┬─────────────╮
-                        &kp W         &kp F         &kp P         &kp B                                       &kp J         &kp L         &kp U         &kp Y        
+                        &kp AT        &kp HASH      &kp DLLR      &kp PRCNT                                   &kp N7        &kp N8        &kp N9        &kp COMMA        
      // ╭─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╮ ╭─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮
-          &hrm LGUI A   &hrm LALT R   &hrm LCTRL S  &hrm LSHFT T  &kp G         &kp M           ___           &hrm RSHFT N  &hrm LCTRL E  &hrm LALT I   &hrm LGUI O   ___
+          &kp EXCL      &kp PLUS      &kp EQUAL     &kp UNDER     &kp MINUS     &kp CARET       &kp N0        &kp N4        &kp N5        &kp N6        &kp DOT       &kp SEMI
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯ ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────╯
-                        &kp X         &kp C         &kp D         &kp V                                       &kp K         &kp H         &kp COMMA     &kp DOT      
+                        ___           &kp QMARK     &kp STAR      &kp AMPS                                    &kp N1        &kp N2        &kp N3        &kp FLSH      
      //               ╰─────────────┼─────────────┼─────────────┼─────────────┤─────────────╮ ╭─────────────├─────────────┼─────────────┼─────────────┼─────────────╯
-                                                                  &lt NAV SPACE &kp TAB         ___           ___                    
+                                                                  &lt NAV SPACE &kp TAB         ___           &kp RALT                    
      //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
