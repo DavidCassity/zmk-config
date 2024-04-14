@@ -10,9 +10,9 @@
 #define ___ &trans
 
 #define DEF 0  // layer shortcuts, must match order in which they are defined below
-//#define NAV 1
-#define SYM 1
-#define MSE 2
+#define NAV 1
+#define SYM 2
+#define MSE 3
 
 /* custom behaviors */
 
@@ -44,17 +44,19 @@ ZMK_BEHAVIOR(win_sleep, macro,
 )
 
 // when NAV and SYM are held jointly
-//ZMK_CONDITIONAL_LAYER(NAV SYM, GER)
+//ZMK_CONDITIONAL_LAYER(NAV SYM, MSE)
 
 // combos
 #undef COMBO_TERM
 #define COMBO_TERM 40  // timeout of 40ms (default is 30ms if omitted)
 //ZMK_COMBO(combo_sleep,  &win_sleep, RT2 RT3, NAV)  // custom sleep macro, only active on NAV layer
-ZMK_COMBO(combo_copy,   &kp LC(C),  LB2 LB3, ALL)  // Ctrl + C, active on all layers
-ZMK_COMBO(combo_paste,  &kp LC(V),  LB1 LB2, ALL)  // Ctrl + V, active on all layers
-ZMK_COMBO(combo_lpar, &kp LPAR, LM1 LM2, DEF) // ( , active on default layer
-ZMK_COMBO(combo_rpar, &kp RPAR, RM2 RM2, DEF)
+ZMK_COMBO(combo_copy, &kp LC(C),  LB2 LB3, ALL)  // Ctrl + C, active on all layers
+ZMK_COMBO(combo_paste, &kp LC(V),  LB1 LB2, ALL)  // Ctrl + V, active on all layers
+ZMK_COMBO(combo_lpar, &kp LPAR, LM2 LM3, DEF) // ( , active on default layer
+ZMK_COMBO(combo_rpar, &kp RPAR, RM2 RM3, DEF)
 ZMK_COMBO(combo_quotes, &kp DQT, RT1 RT2, DEF)
+ZMK_COMBO(combo_z, &kp Z, RB2 RB3, DEF)
+ZMK_COMBO(combo_esc, &kp ESC, LB2 LB3, DEF)
 
 /* keymap */
 
@@ -66,21 +68,21 @@ ZMK_LAYER(default_layer,
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯ ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────╯
                         &kp X         &kp C         &kp D         &kp V                                       &kp J         &kp H         &kp COMMA     &kp DOT      
      //               ╰─────────────┼─────────────┼─────────────┼─────────────┤─────────────╮ ╭─────────────├─────────────┼─────────────┼─────────────┼─────────────╯
-                                                                  &lt SYM SPACE &kp TAB         &kp RET       &kp BSPC                    
+                                                                  &lt SYM SPACE &kp TAB         &kp RET       &bs_del_sym                    
      //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
-/*ZMK_LAYER(nav_layer,
+ZMK_LAYER(nav_layer,
      //               ╭─────────────┬─────────────┬─────────────┬─────────────╮                             ╭─────────────┬─────────────┬─────────────┬─────────────╮
-                        &kp W         &kp F         &kp P         &kp B                                       &kp J         &kp L         &kp U         &kp Y        
+                        &kp W         &kp F         &kp P         &kp B                                       &kp PG_UP     &kp UP        &kp PG_DOWN   &kp INS        
      // ╭─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╮ ╭─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮
-          &hrm LGUI A   &hrm LALT R   &hrm LCTRL S  &hrm LSHFT T  &kp G         &kp M           &lt SYM       &hrm RSHFT N  &hrm LCTRL E  &hrm LALT I   &hrm LGUI O   ___
+          &hrm LGUI A   &hrm LALT R   &hrm LCTRL S  &hrm LSHFT T  &kp G         &kp M           &kp HOME      &kp LEFT      &kp DOWN      &hrm RIGHT    &kp END       ___
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯ ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────╯
-                        &kp X         &kp C         &kp D         &kp V                                       &kp K         &kp H         &kp COMMA     &kp DOT      
+                        &kp X         &kp C         &kp D         &kp V                                       ___           &kp TAB       ___           ___      
      //               ╰─────────────┼─────────────┼─────────────┼─────────────┤─────────────╮ ╭─────────────├─────────────┼─────────────┼─────────────┼─────────────╯
-                                                                  &lt NAV SPACE &kp TAB         &kp BSPC      &kp ENTER                    
+                                                                  &lt NAV SPACE &kp TAB         ___           ___                    
      //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
-)*/
+)
 
 ZMK_LAYER(sym_layer,
      //               ╭─────────────┬─────────────┬─────────────┬─────────────╮                             ╭─────────────┬─────────────┬─────────────┬─────────────╮
@@ -90,7 +92,7 @@ ZMK_LAYER(sym_layer,
      // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────╯ ╰─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────╯
                         ___           &kp QMARK     &kp STAR      &kp AMPS                                    &kp N1        &kp N2        &kp N3        &kp FSLH      
      //               ╰─────────────┼─────────────┼─────────────┼─────────────┤─────────────╮ ╭─────────────├─────────────┼─────────────┼─────────────┼─────────────╯
-                                                                  &lt DEF SPACE &kp TAB         ___           &kp RALT                    
+                                                                  &kp SPACE     &kp TAB         ___           &kp RALT                    
      //                                                         ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯
 )
 
